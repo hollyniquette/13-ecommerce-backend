@@ -3,8 +3,6 @@ const { Model, DataTypes } = require("sequelize");
 // import our database connection from config.js
 const sequelize = require("../config/connection");
 
-// Q: why are lines 1-4 different from the category.js file?
-
 // Initialize Product model (table) by extending off Sequelize's Model class
 class Product extends Model {}
 
@@ -13,24 +11,24 @@ Product.init(
   {
     // define columns //
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
     product_name: {
-      type: Sequelize.toString,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     price: {
-      type: Sequelize.DECIMAL,
+      type: DataTypes.DECIMAL,
       allowNull: false,
       validate: {
         isDecimal: true,
       },
     },
     stock: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 10,
       validate: {
@@ -38,9 +36,9 @@ Product.init(
       },
     },
     category_id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       references: {
-        model: Category,
+        model: "category",
         key: "id",
       },
     },
